@@ -24,13 +24,13 @@ resource "aws_db_event_subscription" "instance_sub" {
     "recovery",
     "restoration"
   ]
-
 }
 
 #------------------------------------------------------------------------------
 # The code below defines alarms based upon Cloudwatch metrics.
 
 resource "aws_cloudwatch_metric_alarm" "cpu_utilization_high" {
+  count                     = var.create_cpu_utilization_alarm ? 1 : 0
   alarm_name                = "${var.db_instance_id}_cpu_utilization_high"
   comparison_operator       = "GreaterThanThreshold"
   evaluation_periods        = local.thresholds["CPUUtilizationEvaluationPeriods"]
@@ -51,6 +51,7 @@ resource "aws_cloudwatch_metric_alarm" "cpu_utilization_high" {
 }
 
 resource "aws_cloudwatch_metric_alarm" "disk_queue_depth_high" {
+  count                     = var.create_disk_queue_depth_alarm ? 1 : 0
   alarm_name                = "${var.db_instance_id}_disk_queue_depth_high"
   comparison_operator       = "GreaterThanThreshold"
   evaluation_periods        = local.thresholds["DiskQueueDepthEvaluationPeriods"]
@@ -71,6 +72,7 @@ resource "aws_cloudwatch_metric_alarm" "disk_queue_depth_high" {
 }
 
 resource "aws_cloudwatch_metric_alarm" "freeable_memory_low" {
+  count                     = var.create_freeable_memory_alarm ? 1 : 0
   alarm_name                = "${var.db_instance_id}_freeable_memory_low"
   comparison_operator       = "LessThanThreshold"
   evaluation_periods        = "1"
@@ -91,6 +93,7 @@ resource "aws_cloudwatch_metric_alarm" "freeable_memory_low" {
 }
 
 resource "aws_cloudwatch_metric_alarm" "free_storage_space_low" {
+  count               = var.create_free_storage_space_alarm ? 1 : 0
   alarm_name          = "${var.db_instance_id}_free_storage_space_low"
   comparison_operator = "LessThanThreshold"
   evaluation_periods  = "1"
@@ -109,6 +112,7 @@ resource "aws_cloudwatch_metric_alarm" "free_storage_space_low" {
 }
 
 resource "aws_cloudwatch_metric_alarm" "swap_usage_high" {
+  count                     = var.create_swap_usage_alarm ? 1 : 0
   alarm_name                = "${var.db_instance_id}_swap_usage_high"
   comparison_operator       = "GreaterThanThreshold"
   evaluation_periods        = "1"

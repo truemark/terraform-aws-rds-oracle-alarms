@@ -10,6 +10,42 @@ variable "cpu_utilization_threshold" {
   default     = 90
 }
 
+variable "create_cpu_utilization_alarm" {
+  description = "Toggle to create cpu_utilization_high_alarm."
+  type        = bool
+  default     = true
+}
+
+variable "create_disk_queue_depth_alarm" {
+  description = "Toggle to create disk_queue_depth_alarm."
+  type        = bool
+  default     = true
+}
+
+variable "create_free_storage_space_alarm" {
+  description = "Toggle to create free_storage_space_alarm."
+  type        = bool
+  default     = true
+}
+
+variable "create_freeable_memory_alarm" {
+  description = "Toggle to create freeable_memory_alarm."
+  type        = bool
+  default     = true
+}
+
+variable "create_percent_free_memory_alarm" {
+  description = "Toggle to create percent_free_memory_alarm."
+  type        = bool
+  default     = true
+}
+
+variable "create_swap_usage_alarm" {
+  description = "Toggle to create swap_usage_alarm."
+  type        = bool
+  default     = true
+}
+
 variable "db_instance_id" {
   description = "The instance ID of the RDS database instance that you want to monitor."
   type        = string
@@ -28,16 +64,16 @@ variable "disk_queue_depth_threshold" {
   default     = 1000
 }
 
-variable "free_storage_space_threshold" {
-  description = "The minimum amount of available storage space in Byte."
-  type        = number
-  default     = 2000000000 # 2 Gigabyte in Byte
-}
-
 variable "free_storage_space_evaluation_periods" {
   description = "The number of periods threshold must be breached to alarm."
   type        = number
   default     = 5
+}
+
+variable "free_storage_space_threshold" {
+  description = "The minimum amount of available storage space in Byte."
+  type        = number
+  default     = 2000000000 # 2 Gigabyte in Byte
 }
 
 variable "freeable_memory_evaluation_periods" {
@@ -67,6 +103,12 @@ variable "percent_free_memory_threshold" {
 variable "sns_topic_name" {
   description = "The name of the SNS topic to publish alerts to."
   type        = string
+}
+
+variable "swap_usage_evaluation_periods" {
+  description = "The number of periods threshold must be breached to alarm."
+  type        = number
+  default     = 5
 }
 
 variable "swap_usage_threshold" {

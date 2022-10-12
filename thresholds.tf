@@ -11,6 +11,6 @@ locals {
     FreeStorageSpaceThreshold          = max(var.free_storage_space_threshold, 0)
     FreeStorageSpaceEvaluationPeriods  = min(max(var.free_storage_space_evaluation_periods, 1), 100)
     SwapUsageThreshold                 = max(var.swap_usage_threshold, 0)
-    SwapUsageEvaluationPeriods         = min(max(var.swap_usage_threshold, 0), 100)
+    SwapUsageEvaluationPeriods         = min(max(var.swap_usage_threshold, 1), 100)
   }
 }
